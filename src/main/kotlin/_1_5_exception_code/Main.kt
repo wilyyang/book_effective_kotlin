@@ -61,7 +61,40 @@ fun pop(num: Int = 1) : List<String> {
     return ret
 }
 
+class Person(val outfit: Outfit, val email: String?, val age : Int? = null)
 open class Outfit(val name : String)
+class Dress(name : String):Outfit(name = name)
+
+fun changeDress(person : Person){
+    require(person.outfit is Dress)
+    val dress: Dress = person.outfit
+}
+
+fun validateEmail(email: String) { /*...*/ }
+
+fun sendEmail(person: Person, message: String){
+    require(person.email != null)
+    val email: String = person.email
+}
+fun sendEmail2(person: Person, text: String){
+    val email = requireNotNull(person.email)
+    validateEmail(email)
+}
+
+fun sendEmail3(person: Person, text: String){
+    requireNotNull(person.email)
+    validateEmail(person.email)
+}
+
+fun sendEmail4(person: Person, text: String){
+    val email : String = person.email ?: return
+}
+fun sendEmail5(person: Person, text: String){
+    val email : String = person.email ?: run {
+        println("Email not sent, no email address")
+        return
+    }
+}
 
 
 suspend fun main(): Unit = runBlocking{
