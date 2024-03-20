@@ -83,17 +83,37 @@ class UserControllerTest {
 }
 
 class Bundle
+class Extras{
+    fun getInt(key: String) = 1
+    fun getBoolean(key: String) = false
+}
+class Intent{
+    val extras : Extras = Extras()
+}
+
+val DOCTOR_ID_ARG = "DOCTOR_ID_ARG"
+val FROM_NOTIFICATION_ARG = "FROM_NOTIFICATION_ARG"
 open class Activity{
+    open val intent : Intent = Intent()
     open fun onCreate(savedInstanceState: Bundle?){}
 }
 class DoctorActivity: Activity() {
-    private var doctorId: Int by Delegates.notNull()
+//    private var doctorId: Int by Delegates.notNull()
+    private val doctorId: Int by lazy {
+        arg(DOCTOR_ID_ARG)
+    }
+
     private var fromNotification: Boolean by
             Delegates.notNull()
+//    private lateinit var testId : Int
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        doctorId = intent.extras.getInt(DOCTOR_ID_ARG)
+        fromNotification = intent.extras.getBoolean(FROM_NOTIFICATION_ARG)
     }
+
+    private fun arg(key : String) : Int = intent.extras.getInt(key)
 }
 
 
