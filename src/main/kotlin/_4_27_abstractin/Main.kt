@@ -1,8 +1,12 @@
 package _4_27_abstractin
 
+import _1_8_null.Intent
 import kotlinx.coroutines.runBlocking
 
-class Context
+open class Context {
+    fun startActivity(intent: Intent){}
+    fun startActivityForResult(intent: Intent, requestCode: Int){}
+}
 class Toast {
     enum class Length{ SHORT, LONG }
 
