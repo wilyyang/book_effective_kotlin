@@ -50,7 +50,7 @@ fun test1(){
 }
 
 fun test2() {
-    data class FullName(
+    class FullName(
         var name: String,
         var surname: String
     ) {
